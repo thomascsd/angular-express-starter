@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "prestart": "rimraf dist && ng build --prod --named-chunks && ngc",
+    "prestart": "rimraf dist && npm run build && ngc && npm run precache",
     "start": "ts-node ./server/index.ts",
     "start.ng": "ng serve",
     "build": "ng build --aot -prod --named-chunks",
@@ -25,10 +25,12 @@
     "@angular/platform-browser-dynamic": "^4.3.6",
     "@angular/platform-server": "^4.4.0-RC.0",
     "@angular/router": "^4.3.6",
+    "@types/morgan": "^1.7.32",
     "body-parser": "^1.17.2",
     "core-js": "^2.4.1",
     "express": "^4.15.4",
     "method-override": "^2.3.9",
+    "morgan": "^1.8.2",
     "rimraf": "^2.6.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.17"

@@ -1,13 +1,12 @@
 module.exports = {
     staticFileGlobs: [
-      './server/dist/**.html',
-      './server/dist/**.js',
-      './server/dist/**.css',
-      './server/dist/assets/images/*',
-      './server/dist/assets/icons/*'
+      './dist/**.html',
+      './dist/**.js',
+      './dist/**.css',
+      './dist/assets/images/*',
+      './dist/assets/icons/*'
     ],
-    root: './server/dist',
-    stripPrefix: './server/dist/',
+    root: './dist',
+    stripPrefix: './dist/',
     navigateFallback: '/index.html'
   };
-  

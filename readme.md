@@ -5,3 +5,10 @@
 * Support PWA (Progressive Web App)
 * Support SSR (Server Side Rendering)
 * Heroku compability
+
+## Install
+```
+git clone 
+npm install
+```
+
