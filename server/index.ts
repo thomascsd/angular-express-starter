@@ -1,6 +1,3 @@
-import Server from "./server";
-
-
+import Server from './server';
 const server = new Server();
-
-server.run(3000);
+server.run(3100);
