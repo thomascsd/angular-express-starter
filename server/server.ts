@@ -9,6 +9,7 @@ import * as methodOverride from 'method-override';
 import * as logger from 'morgan';
 import * as path from 'path';
 import { readFileSync } from 'fs';
+import ApiRouter from './api/ApiRouter';
 
 export default class Server {
   public app: express.Application;
@@ -42,12 +43,21 @@ export default class Server {
   }
 
   public route() {
-    this.app.get('*', (req, res) => {
-      res.render('index', { req });
+    this.app.get('*', (req, res, next) => {
+      if (req.url.indexOf('/api') !== -1) {
+        next();
+      } else {
+        res.render('index', { req });
+      }
+
     });
   }
 
   public api() {
+    const router: express.Router = express.Router();
+    const apiRouter: ApiRouter = new ApiRouter();
+
+    apiRouter.setRouter(router);
 
   }
 

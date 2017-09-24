@@ -1,3 +1,3 @@
 import Server from './server';
 const server = new Server();
-server.run(3100);
+server.run(process.env.PORT || 3000);
