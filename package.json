@@ -4,10 +4,11 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "prestart": "rimraf dist && npm run build && ngc && npm run precache",
     "start": "ts-node ./server/index.ts",
-    "start.dev": "ng serve",
-    "build": "rimraf dist && ng build --prod --named-chunks",
+    "dev": "ng serve --proxy-config proxy.conf.json",
+    "dev-server": "nodemon -e ts -w ./server -x npm run server",
+    "server": "ts-node ./server/app.ts",
+    "build": "rimraf dist && ng build --prod --named-chunks && npm run precache",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -45,7 +46,8 @@
     "@types/node": "^6.0.88",
     "codelyzer": "~3.1.1",
     "jasmine-core": "~2.6.2",
-    "jasmine-spec-reporter": "~4.1.0",    "karma": "~1.7.0",
+    "jasmine-spec-reporter": "~4.1.0",
+    "karma": "~1.7.0",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
     "karma-coverage-istanbul-reporter": "^1.2.1",
@@ -58,6 +60,6 @@
     "typescript": "~2.3.3"
   },
   "devDependencies": {
-
+    "nodemon": "^1.12.1"
   }
 }
