@@ -4,10 +4,10 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ts-node ./server/index.ts",
+    "start": "ts-node --project serve ./server/index.ts",
     "dev": "ng serve --proxy-config proxy.conf.json",
     "dev-server": "nodemon -e ts -w ./server -x npm run server",
-    "server": "ts-node ./server/app.ts",
+    "server": "ts-node --project serve ./server/index.ts",
     "build": "rimraf dist && ng build --prod --named-chunks && npm run precache",
     "test": "ng test",
     "lint": "ng lint",
