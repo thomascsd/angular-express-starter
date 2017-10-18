@@ -1,6 +1,6 @@
 import * as express from 'express';
-import { Route } from './interfaces/Route';
-import { Router } from './interfaces/Router';
+import { Route } from '../interfaces/Route';
+import { Router } from '../interfaces/Router';
 
 const apiRoute: Route = {
   path: '/api',
