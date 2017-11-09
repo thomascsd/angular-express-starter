@@ -1,18 +1,18 @@
 import 'reflect-metadata';
 import 'zone.js/dist/zone-node';
-import { platformServer, renderModuleFactory } from '@angular/platform-server';
+import { renderModuleFactory } from '@angular/platform-server';
 import { enableProdMode } from '@angular/core';
-import { AppServerModuleNgFactory } from '../dist/ngfactory/src/app/app.server.module.ngfactory';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as methodOverride from 'method-override';
 import * as logger from 'morgan';
 import * as path from 'path';
 import { readFileSync } from 'fs';
-import ApiRouter from './api/ApiRouter';
+import ApiRouter from './routes/api-router';
 
 export default class Server {
   public app: express.Application;
+  private distFolder = path.join(process.cwd(), 'dist');
 
   constructor() {
     this.app = express();
@@ -22,13 +22,23 @@ export default class Server {
   }
 
   public config() {
-    const template = readFileSync(path.join(__dirname, '..', 'dist', 'index.html')).toString();
+    const template = readFileSync(path.join(this.distFolder, 'browser', 'index.html')).toString();
+    // * NOTE :: leave this as require() since this file is built Dynamically from webpack
+    const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('../dist/server/main.bundle');
+    const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
 
     this.app.engine('html', (_, options, callback) => {
-      const opts = { document: template, url: options.req.url };
-
-      renderModuleFactory(AppServerModuleNgFactory, opts)
-        .then(html => callback(null, html));
+      renderModuleFactory(AppServerModuleNgFactory, {
+        // Our index.html
+        document: template,
+        url: options.req.url,
+        // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
+        extraProviders: [
+          provideModuleMap(LAZY_MODULE_MAP)
+        ]
+      }).then(html => {
+        callback(null, html);
+      });
     });
 
     this.app.set('view engine', 'html');
@@ -36,8 +46,9 @@ export default class Server {
     this.app.use(logger('dev'));
     this.app.use(bodyParser.json());
     this.app.use(methodOverride());
-    // this.app.use(express.static(path.join(__dirname, '/dist')));
-    this.app.get('*.*', express.static(path.join(__dirname, '..', 'dist')));
+
+    // Server static files from /browser
+    this.app.get('*.*', express.static(path.join(this.distFolder, 'browser')));
 
     enableProdMode();
   }
@@ -47,7 +58,7 @@ export default class Server {
       if (req.url.indexOf('/api') !== -1) {
         next();
       } else {
-        res.render('index', { req });
+        res.render(path.join(this.distFolder, 'browser', 'index.html'), { req });
       }
 
     });
