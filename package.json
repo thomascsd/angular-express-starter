@@ -5,7 +5,6 @@
   "scripts": {
     "start": "npm run build:ssr && npm run server",
     "dev": "ng serve --proxy-config proxy.conf.json",
-    "dev-server": "npm run build:ssr && npm run server",
     "server": "nodemon dist/server.js",
     "build": "rimraf dist && ng build --prod && npm run precache",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
