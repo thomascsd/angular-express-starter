@@ -13,3 +13,9 @@ git clone
 npm install
 ```
 
+## License
+- License: MIT
+
+## Author 
+- Author: thomascsd
+
