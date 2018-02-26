@@ -38,6 +38,7 @@
     "@types/morgan": "^1.7.32",
     "@types/node": "^8.0.47",
     "body-parser": "^1.17.2",
+    "bootstrap": "^4.0.0",
     "codelyzer": "~4.0.0",
     "core-js": "^2.5.3",
     "express": "^4.15.4",
