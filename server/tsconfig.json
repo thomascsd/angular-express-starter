@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/server",
+    "baseUrl": "",
+    "target": "es6"
+  },
+  "baseUrl": "../server",
+  "include": [
+    "../server/**/*"
+  ]
+}
