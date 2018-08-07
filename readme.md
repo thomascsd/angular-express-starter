@@ -1,21 +1,23 @@
 # Angular-express-starter
 
 ## Fearture
-* Use Typescript
-* Created by angular-cli
-* Support PWA (Progressive Web App)
-* Support SSR (Server Side Rendering)
-* Heroku compability
+
+- Use Typescript
+- Created by angular-cli
+- Support PWA (Progressive Web App)
+- Heroku compability
 
 ## Install
+
 ```
-git clone 
+git clone
 npm install
 ```
 
 ## License
+
 - License: MIT
 
-## Author 
-- Author: thomascsd
+## Author
 
+- Author: thomascsd
