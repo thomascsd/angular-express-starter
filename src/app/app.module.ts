@@ -7,16 +7,9 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LayoutComponent
-  ],
-  imports: [
-    BrowserModule.withServerTransition({ appId: 'angularExpressStarter' }),
-    AppRoutingModule,
-    SharedModule
-  ],
+  declarations: [AppComponent, LayoutComponent],
+  imports: [BrowserModule, AppRoutingModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
