@@ -10,7 +10,7 @@
 ## Install
 
 ```
-git clone
+git clone https://github.com/thomascsd/angular-express-starter.git <Project Name>
 npm install
 ```
 
