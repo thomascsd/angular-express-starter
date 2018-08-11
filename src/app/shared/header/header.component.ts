@@ -10,6 +10,8 @@ export class HeaderComponent implements OnInit {
   @Input() buttonVisible = false;
   @Input() signInButtonVisible = true;
   @Output() clicked = new EventEmitter<any>();
+  @Output() logedIn = new EventEmitter<any>();
+
   constructor() {}
 
   ngOnInit() {}
@@ -17,5 +19,10 @@ export class HeaderComponent implements OnInit {
   onclick(evt: Event) {
     evt.preventDefault();
     this.clicked.emit();
+  }
+
+  onLogedIn(evt: Event) {
+    evt.preventDefault();
+    this.logedIn.emit();
   }
 }

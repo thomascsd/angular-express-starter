@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="topbar-right">
-      <a *ngIf="signInButtonVisible" class="btn btn-sm btn-primary mr-4" href="/oauth/index">Sign in</a>
+      <a *ngIf="signInButtonVisible" class="btn btn-sm btn-primary mr-4" (click)="onLogedIn($event)" href="#">Sign in</a>
       <a *ngIf="buttonVisible" class="btn btn-sm btn-outline btn-primary hidden-sm-down" href="#" (click)="onclick($event)">{{buttonText}}</a>
     </div>
   </div>
