@@ -2,11 +2,10 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/server",
+    "module": "commonjs",
     "baseUrl": "",
     "target": "es6"
   },
   "baseUrl": "../server",
-  "include": [
-    "../server/**/*"
-  ]
+  "include": ["../server/**/*"]
 }
