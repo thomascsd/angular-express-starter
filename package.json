@@ -61,6 +61,7 @@
     "ts-node": "^8.0.3",
     "tslint": "~5.14.0",
     "typescript": "^3.2.4",
+    "uppy": "^0.30.3",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
