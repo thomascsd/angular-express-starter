@@ -1,6 +1,6 @@
 {
   "name": "angular-express-starter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "start": "ts-node --project src/server/tsconfig.json ./src/server/index.ts",
