@@ -11,7 +11,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/client",
             "index": "src/client/index.html",
             "main": "src/client/main.ts",
             "tsConfig": "src/client/tsconfig.app.json",
@@ -87,10 +87,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/client/tsconfig.app.json",
-              "src/client/tsconfig.spec.json"
-            ],
+            "tsConfig": ["src/client/tsconfig.app.json", "src/client/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"]
           }
         }

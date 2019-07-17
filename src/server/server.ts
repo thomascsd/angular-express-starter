@@ -7,7 +7,7 @@ import ApiRouter from './routes/api-router';
 
 export default class Server {
   public app: express.Application;
-  private distFolder = path.join(__dirname, '..', '..', 'dist');
+  private distFolder = path.join(__dirname, '..', 'client');
 
   constructor() {
     this.app = express();
