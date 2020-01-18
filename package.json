@@ -4,8 +4,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./dist/server/index.js",
-    "dev:server": "nodemon ./dist/server/index.js",
+    "dev:server": "nodemon -e ts -w ./server -x npm run server",
     "dev:client": "ng serve --proxy-config proxy.conf.json -o",
+    "server": "ts-node --project src/server/tsconfig.json ./src/server/index.ts",
     "deploy": "git push origin master && git push heroku master",
     "build": "npm run build:server && npm run build:client",
     "build:client": "ng build --prod",
