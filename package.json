@@ -63,7 +63,7 @@
     "tslib": "^1.10.0",
     "tslint": "~6.0.0",
     "typedi": "^0.8.0",
-    "typescript": "^3.4.5",
+    "typescript": "^3.7.5",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

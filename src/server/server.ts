@@ -3,13 +3,13 @@ import { useExpressServer, useContainer } from "routing-controllers";
 import { Container } from "typedi";
 import * as logger from "morgan";
 import * as path from "path";
-import ApiRouter from "./routes/api-router";
 
 export default class Server {
   public app: express.Application;
   private distFolder = path.join(__dirname, "..", "client");
 
   constructor() {
+    useContainer(Container);
     this.app = express();
     this.config();
     this.route();
