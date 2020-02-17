@@ -3,7 +3,7 @@ import { Inject } from 'typedi';
 
 @Inject()
 export class RestDbService {
-  async getData<T>(tableName: string, query?: any[]): Promise<T[]> {
+  async getDatas<T>(tableName: string, query?: any[]): Promise<T[]> {
     let url = `${process.env.RESTDB_URL}${tableName}`;
     const querystring = this.getQuery(query || []);
 
