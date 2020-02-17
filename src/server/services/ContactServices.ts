@@ -11,6 +11,7 @@ export class ContactService {
   }
 
   async saveContact(contact: Contact) {
-    return await this.db.saveData<Contact>('contact', contact);
+    await this.db.saveData<Contact>('contact', contact);
+    return 'ok';
   }
 }

@@ -9,6 +9,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './contact/contact.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, ContactComponent],
@@ -19,7 +20,8 @@ import { ContactComponent } from './contact/contact.component';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MaterialModule
   ],
   providers: [{ provide: DynamicFormBuilder, useClass: DynamicFormBuilder }],
   bootstrap: [AppComponent]

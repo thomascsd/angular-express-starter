@@ -9,11 +9,11 @@ import { Contact } from '../../../shared/models/Contact';
 export class ContactService {
   constructor(private client: HttpClient) {}
 
-  getContacts(): Observable<Contact> {
-    return this.client.get<Contact>('/api/contact/list');
+  getContacts(): Observable<Contact[]> {
+    return this.client.get<Contact[]>('/api/contact/list');
   }
 
   saveContact(contact: Contact) {
-    return this.client.post('/api/conact/save', contact);
+    return this.client.post('/api/contact/save', contact);
   }
 }

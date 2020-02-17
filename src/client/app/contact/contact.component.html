@@ -34,16 +34,33 @@
       <input id="add" class="btn btn-primary" type="submit" value="submit" />
     </form>
   </div>
-  <!-- <div class="contact-container">
-    <table id="contactList" class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>name</th>
-          <th>email</th>
-          <th>mobile</th>
-        </tr>
-      </thead>
-    </table>
-  </div> -->
+
+  <table
+    class="table table-bordered mt-3"
+    cdk-table
+    [dataSource]="dataSource"
+    matSort
+    matSortDisableClear
+  >
+    <!-- Name Column -->
+    <ng-container cdkColumnDef="name">
+      <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Name</th>
+      <td cdk-cell *cdkCellDef="let row">{{ row.name }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container cdkColumnDef="email">
+      <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Email</th>
+      <td cdk-cell *cdkCellDef="let row">{{ row.email }}</td>
+    </ng-container>
+
+    <!-- Mobil Column -->
+    <ng-container cdkColumnDef="mobile">
+      <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Mobile</th>
+      <td cdk-cell *cdkCellDef="let row">{{ row.mobile }}</td>
+    </ng-container>
+
+    <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
+    <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
+  </table>
 </div>
