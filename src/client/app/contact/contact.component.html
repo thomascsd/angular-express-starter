@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="add-form-container">
+    <form [formGroup]="group" id="addForm" (ngSubmit)="save()">
+      <div class="form-group">
+        <label for="contactName">name</label>
+        <input
+          id="contactName"
+          type="text"
+          placeholder="name"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">email</label>
+        <input
+          id="email"
+          type="email"
+          placeholder="email"
+          class="form-control"
+          formControlName="email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="mobile">mobile</label>
+        <input
+          id="mobile"
+          type="text"
+          placeholder="mobile"
+          class="form-control"
+          formControlName="mobile"
+        />
+      </div>
+      <input id="add" class="btn btn-primary" type="submit" value="submit" />
+    </form>
+  </div>
+  <!-- <div class="contact-container">
+    <table id="contactList" class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>name</th>
+          <th>email</th>
+          <th>mobile</th>
+        </tr>
+      </thead>
+    </table>
+  </div> -->
+</div>

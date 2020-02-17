@@ -1,10 +1,18 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   {
     path: '',
-    children: []
+    redirectTo: 'contact',
+    pathMatch: 'full'
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [{ path: 'contact', component: ContactComponent }]
   }
 ];
 
@@ -12,4 +20,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
