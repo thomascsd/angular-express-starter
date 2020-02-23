@@ -6,13 +6,13 @@ import { Component, Input, ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./control-errors.component.scss']
 })
 export class ControlErrorsComponent {
-  private _text: string;
-  private _hide = true;
+  displayText: string;
+  displayHide = true;
 
   @Input() set text(value) {
-    if (value !== this._text) {
-      this._text = value;
-      this._hide = !value;
+    if (value !== this.displayText) {
+      this.displayText = value;
+      this.displayHide = !value;
       this.cdr.detectChanges();
     }
   }
