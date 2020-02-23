@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './contact/contact.component';
 import { MaterialModule } from './material/material.module';
+import { ValidationsModule } from './validations/validations.module';
 
 @NgModule({
   declarations: [AppComponent, LayoutComponent, ContactComponent],
@@ -21,7 +22,8 @@ import { MaterialModule } from './material/material.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    ValidationsModule
   ],
   providers: [{ provide: DynamicFormBuilder, useClass: DynamicFormBuilder }],
   bootstrap: [AppComponent]

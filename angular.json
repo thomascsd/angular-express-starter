@@ -18,9 +18,15 @@
             "tsConfig": "src/client/tsconfig.app.json",
             "polyfills": "src/client/polyfills.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["src/client", "src/client/themes"]
+              "includePaths": [
+                "src/client",
+                "src/client/themes"
+              ]
             },
-            "assets": ["src/client/assets", "src/client/favicon.ico"],
+            "assets": [
+              "src/client/assets",
+              "src/client/favicon.ico"
+            ],
             "styles": [
               {
                 "input": "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
@@ -88,14 +94,22 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/client/sass/styles.scss"
             ],
-            "assets": ["src/client/assets", "src/client/favicon.ico"]
+            "assets": [
+              "src/client/assets",
+              "src/client/favicon.ico"
+            ]
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["src/client/tsconfig.app.json", "src/client/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "src/client/tsconfig.app.json",
+              "src/client/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -115,8 +129,12 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**"]
+            "tsConfig": [
+              "e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
           }
         }
       }
@@ -131,5 +149,8 @@
     "@schematics/angular:directive": {
       "prefix": "app"
     }
+  },
+  "cli": {
+    "analytics": "3d8b9d8f-4ac8-4967-938a-1b59ecbc3cff"
   }
 }
