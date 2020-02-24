@@ -19,15 +19,15 @@ export class ContactComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Contact>;
   subject$ = new Subject<boolean>();
 
-  constructor(private fb: DynamicFormBuilder, private contactService: ContactService) {
+  constructor(private fb: DynamicFormBuilder, private contactService: ContactService) {}
+
+  ngOnInit(): void {
     this.group = this.fb.group(Contact, {
       name: '',
       email: '',
       mobile: ''
     });
-  }
 
-  ngOnInit(): void {
     this.getContacts();
   }
 

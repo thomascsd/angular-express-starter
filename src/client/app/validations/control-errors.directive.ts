@@ -4,7 +4,8 @@ import {
   Optional,
   ComponentFactoryResolver,
   ViewContainerRef,
-  ComponentRef
+  ComponentRef,
+  OnDestroy
 } from '@angular/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { NgControl } from '@angular/forms';
@@ -16,7 +17,7 @@ import { ControlErrorsComponent } from './control-errors/control-errors.componen
   // tslint:disable-next-line: directive-selector
   selector: '[formControl], [formControlName]'
 })
-export class ControlErrorsDirective implements OnInit {
+export class ControlErrorsDirective implements OnInit, OnDestroy {
   ref: ComponentRef<ControlErrorsComponent>;
 
   constructor(
@@ -44,4 +45,6 @@ export class ControlErrorsDirective implements OnInit {
     this.ref = this.vcf.createComponent(factory);
     this.ref.instance.text = message;
   }
+
+  ngOnDestroy(): void {}
 }
