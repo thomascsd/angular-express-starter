@@ -4,8 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { DynamicFormBuilder, DynamicFormGroup } from 'ngx-dynamic-form-builder';
 import { Contact } from '../../../shared/models/Contact';
 import { ContactService } from './contact.service';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({
   selector: 'app-contact',
@@ -17,7 +16,6 @@ export class ContactComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['name', 'email', 'mobile'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   dataSource: MatTableDataSource<Contact>;
-  subject$ = new Subject<boolean>();
 
   constructor(private fb: DynamicFormBuilder, private contactService: ContactService) {}
 
@@ -34,7 +32,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   getContacts() {
     this.contactService
       .getContacts()
-      .pipe(takeUntil(this.subject$))
+      .pipe(untilDestroyed(this))
       .subscribe((contacts: Contact[]) => {
         this.dataSource = new MatTableDataSource(contacts);
         this.dataSource.sort = this.sort;
@@ -49,7 +47,5 @@ export class ContactComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.subject$.next(true);
-  }
+  ngOnDestroy(): void {}
 }

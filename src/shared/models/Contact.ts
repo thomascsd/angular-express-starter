@@ -6,14 +6,20 @@ export class Contact {
     plainToClassFromExist(this, data);
   }
 
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: '姓名為必需填寫'
+  })
   name: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: 'Email為必需填寫'
+  })
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: '手機為必需填寫'
+  })
   @IsMobilePhone('zh-TW')
   mobile: string;
 }

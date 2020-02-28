@@ -8,8 +8,9 @@ import {
   OnDestroy
 } from '@angular/core';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { NgControl } from '@angular/forms';
-import { merge } from 'rxjs';
+import { NgControl, FormGroupDirective } from '@angular/forms';
+import { ShortValidationErrors } from 'ngx-dynamic-form-builder';
+import { merge, BehaviorSubject } from 'rxjs';
 import { FormSubmitDirective } from './form-submit.directive';
 import { ControlErrorsComponent } from './control-errors/control-errors.component';
 
@@ -23,6 +24,7 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
   constructor(
     private control: NgControl,
     @Optional() private formSubmit: FormSubmitDirective,
+    @Optional() private formGroup: FormGroupDirective,
     private resolver: ComponentFactoryResolver,
     private vcf: ViewContainerRef
   ) {}
@@ -31,12 +33,26 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
     merge(this.control.valueChanges, this.formSubmit.submit$)
       .pipe(untilDestroyed(this))
       .subscribe(() => {
-        const errors = this.control.errors;
+        const key = this.control.name;
+        const formGroup = this.formGroup.control;
+
+        console.log(this.control);
+
+        const errors = formGroup['customValidateErrors'] as BehaviorSubject<ShortValidationErrors>;
         console.log(errors);
-        if (errors) {
-        } else if (this.ref) {
-          this.setError(null);
-        }
+
+        errors.subscribe((shortError: ShortValidationErrors) => {
+          const obj = shortError[key];
+
+          console.log(shortError);
+
+          if (obj) {
+            console.log(obj[0]);
+            this.setError(obj[0]);
+          } else if (this.ref) {
+            this.setError(null);
+          }
+        });
       });
   }
 
