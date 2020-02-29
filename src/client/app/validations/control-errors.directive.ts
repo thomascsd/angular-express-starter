@@ -11,6 +11,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { NgControl, FormGroupDirective } from '@angular/forms';
 import { ShortValidationErrors } from 'ngx-dynamic-form-builder';
 import { merge, BehaviorSubject } from 'rxjs';
+import { filter, first, map } from 'rxjs/operators';
 import { FormSubmitDirective } from './form-submit.directive';
 import { ControlErrorsComponent } from './control-errors/control-errors.component';
 
@@ -36,28 +37,34 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
         const key = this.control.name;
         const formGroup = this.formGroup.control;
 
-        console.log(this.control);
+        // console.log(this.control);
 
         const errors = formGroup['customValidateErrors'] as BehaviorSubject<ShortValidationErrors>;
-        console.log(errors);
+        // console.log(errors);
 
-        errors.subscribe((shortError: ShortValidationErrors) => {
-          const obj = shortError[key];
+        errors
+          .pipe(
+            map(shortErrors => shortErrors[key]),
+            filter(obj => !!obj),
+            first()
+          )
+          .subscribe(value => {
+            console.log(value);
 
-          console.log(shortError);
+            if (value) {
+              this.setError(value);
+            }
+          });
 
-          if (obj) {
-            console.log(obj[0]);
-            this.setError(obj[0]);
-          } else if (this.ref) {
-            this.setError(null);
-          }
-        });
+        if (errors.observers.length === 0 && this.vcf) {
+          this.setError(null);
+        }
       });
   }
 
   private setError(message: string) {
     const factory = this.resolver.resolveComponentFactory(ControlErrorsComponent);
+    this.vcf.clear();
     this.ref = this.vcf.createComponent(factory);
     this.ref.instance.text = message;
   }
