@@ -14,4 +14,9 @@ export class ContactService {
     await this.db.saveData<Contact>('appLdD9UKehdDawCn', 'contact', contact);
     return 'ok';
   }
+
+  async updateContact(contact: Contact) {
+    await this.db.updateData<Contact>('appLdD9UKehdDawCn', 'contact', contact);
+    return 'ok';
+  }
 }

@@ -61,7 +61,12 @@ export class ContactComponent implements OnInit, OnDestroy {
     }
   }
 
-  update(contact: ContactViewModel) {}
+  update(contact: ContactViewModel) {
+    delete contact.updateMode;
+    this.contactService.updateContact(contact).subscribe(() => {
+      this.getContacts();
+    });
+  }
 
   changeMode(contact: ContactViewModel) {
     contact.updateMode = !contact.updateMode;

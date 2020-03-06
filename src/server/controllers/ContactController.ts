@@ -17,4 +17,9 @@ export class ContactController {
   saveContact(@Body() contact: Contact) {
     return this.contactService.saveContact(contact);
   }
+
+  @Post('/contact/update')
+  update(@Body() contact: Contact) {
+    return this.contactService.updateContact(contact);
+  }
 }

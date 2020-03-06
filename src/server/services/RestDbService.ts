@@ -27,13 +27,17 @@ export class RestDbService {
     const body = await airtable.create({ fields: data });
 
     console.dir(body);
+    return body;
   }
 
-  async updateData<T extends BaseModel>(baseId: string, tableName: string, id: string, data: T) {
+  async updateData<T extends BaseModel>(baseId: string, tableName: string, data: T) {
+    const id = data.id;
+    delete data.id;
     const airtable = this.getAirTableClient(baseId, tableName);
-    const body = await airtable.update(data.id, data);
+    const body = await airtable.update(id, data);
 
     console.dir(body);
+    return body;
   }
 
   private getAirTableClient(baseId: string, tableName: string) {
