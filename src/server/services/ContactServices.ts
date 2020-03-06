@@ -7,7 +7,7 @@ export class ContactService {
   constructor(private db: RestDbService) {}
 
   async getContacts(): Promise<Contact[]> {
-    return await this.db.getDatas<Contact>('contact');
+    return await this.db.getDatas<Contact>('appLdD9UKehdDawCn', 'contact');
   }
 
   async saveContact(contact: Contact) {

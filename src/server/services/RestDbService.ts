@@ -1,43 +1,39 @@
-import got from 'got';
+const Airtable = require('airtable-node');
 import { Inject } from 'typedi';
 
 @Inject()
 export class RestDbService {
-  async getDatas<T>(tableName: string, query?: any[]): Promise<T[]> {
-    let url = `${process.env.RESTDB_URL}${tableName}`;
-    const querystring = this.getQuery(query || []);
+  async getDatas<T>(baseName: string, tableName: string, query?: any[]): Promise<T[]> {
+    try {
+      const airtable = new Airtable({ apiKey: process.env.AIRTABLE_API })
+        .base(baseName)
+        .table(tableName);
 
-    url += querystring;
-    const client = this.getGot();
-    const body = await client.get(url).json<T[]>();
+      const { records } = await airtable.list();
 
-    return body;
+      const body: T[] = records.map(o => {
+        const fields = o.fields;
+        fields.id = o.id;
+        return fields;
+      }) as T[];
+
+      return body;
+    } catch (error) {
+      console.dir(error);
+      throw error;
+    }
   }
 
   async saveData<T>(tableName: string, data: T) {
-    const url = `${process.env.RESTDB_URL}${tableName}`;
-    const client = this.getGot();
-
-    const body = await client
-      .post(url, {
-        json: data
-      })
-      .json<T>();
-
-    console.log(body);
-
-    return body;
-  }
-
-  private getGot() {
-    const client = got.extend({
-      headers: {
-        'cache-control': 'no-cache',
-        'x-apikey': `${process.env.RESTDB_API}`
-      }
-    });
-
-    return client;
+    // const url = `${process.env.RESTDB_URL}${tableName}`;
+    // const client = this.getGot();
+    // const body = await client
+    //   .post(url, {
+    //     json: data
+    //   })
+    //   .json<T>();
+    // console.log(body);
+    // return body;
   }
 
   private getQuery(query: any[]): string {
