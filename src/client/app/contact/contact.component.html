@@ -42,22 +42,64 @@
     matSort
     matSortDisableClear
   >
+    <ng-container cdkColumnDef="cmd">
+      <th cdk-header-cell *cdkHeaderCellDef></th>
+      <td cdk-cell *cdkCellDef="let row" class="d-flex flex-row justify-content-around">
+        <button *ngIf="!row.updateMode" (click)="changeMode(row)" class="btn btn-outline-primary">
+          編輯
+        </button>
+        <button *ngIf="row.updateMode" (click)="update(row)" class="btn btn-outline-primary">
+          儲存
+        </button>
+        <button *ngIf="row.updateMode" (click)="cancel(row)" class="btn btn-outline-primary">
+          取消
+        </button>
+      </td>
+    </ng-container>
+
     <!-- Name Column -->
     <ng-container cdkColumnDef="name">
       <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Name</th>
-      <td cdk-cell *cdkCellDef="let row">{{ row.name }}</td>
+      <td cdk-cell *cdkCellDef="let row">
+        <ng-container *ngIf="row.updateMode; else name">
+          <div class="form-group">
+            <input type="text" placeholder="name" class="form-control" [(ngModel)]="row.name" />
+          </div>
+        </ng-container>
+        <ng-template #name>
+          {{ row.name }}
+        </ng-template>
+      </td>
     </ng-container>
 
     <!-- Email Column -->
     <ng-container cdkColumnDef="email">
       <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Email</th>
-      <td cdk-cell *cdkCellDef="let row">{{ row.email }}</td>
+      <td cdk-cell *cdkCellDef="let row">
+        <ng-container *ngIf="row.updateMode; else email">
+          <div class="form-group">
+            <input type="text" placeholder="email" class="form-control" [(ngModel)]="row.email" />
+          </div>
+        </ng-container>
+        <ng-template #email>
+          {{ row.email }}
+        </ng-template>
+      </td>
     </ng-container>
 
     <!-- Mobil Column -->
     <ng-container cdkColumnDef="mobile">
       <th cdk-header-cell *cdkHeaderCellDef mat-sort-header>Mobile</th>
-      <td cdk-cell *cdkCellDef="let row">{{ row.mobile }}</td>
+      <td cdk-cell *cdkCellDef="let row">
+        <ng-container *ngIf="row.updateMode; else mobile">
+          <div class="form-group">
+            <input type="text" placeholder="mobile" class="form-control" [(ngModel)]="row.mobile" />
+          </div>
+        </ng-container>
+        <ng-template #mobile>
+          {{ row.mobile }}
+        </ng-template>
+      </td>
     </ng-container>
 
     <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>

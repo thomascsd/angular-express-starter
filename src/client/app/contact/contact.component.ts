@@ -1,10 +1,23 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { untilDestroyed } from 'ngx-take-until-destroy';
 import { DynamicFormBuilder, DynamicFormGroup } from 'ngx-dynamic-form-builder';
 import { Contact } from '../../../shared/models/Contact';
 import { ContactService } from './contact.service';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+
+class ContactViewModel extends Contact {
+  updateMode: boolean;
+
+  constructor(contact: Contact) {
+    super();
+    this.id = contact.id;
+    this.name = contact.name;
+    this.mobile = contact.mobile;
+    this.email = contact.email;
+    this.updateMode = false;
+  }
+}
 
 @Component({
   selector: 'app-contact',
@@ -13,9 +26,9 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 })
 export class ContactComponent implements OnInit, OnDestroy {
   group: DynamicFormGroup<Contact>;
-  displayedColumns: string[] = ['name', 'email', 'mobile'];
+  displayedColumns: string[] = ['cmd', 'name', 'email', 'mobile'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  dataSource: MatTableDataSource<Contact>;
+  dataSource: MatTableDataSource<ContactViewModel>;
 
   constructor(private fb: DynamicFormBuilder, private contactService: ContactService) {}
 
@@ -34,7 +47,8 @@ export class ContactComponent implements OnInit, OnDestroy {
       .getContacts()
       .pipe(untilDestroyed(this))
       .subscribe((contacts: Contact[]) => {
-        this.dataSource = new MatTableDataSource(contacts);
+        const viewModels: ContactViewModel[] = contacts.map(c => new ContactViewModel(c));
+        this.dataSource = new MatTableDataSource(viewModels);
         this.dataSource.sort = this.sort;
       });
   }
@@ -45,6 +59,16 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.getContacts();
       });
     }
+  }
+
+  update(contact: ContactViewModel) {}
+
+  changeMode(contact: ContactViewModel) {
+    contact.updateMode = !contact.updateMode;
+  }
+
+  cancel(contact: ContactViewModel) {
+    contact.updateMode = false;
   }
 
   ngOnDestroy(): void {}
