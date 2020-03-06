@@ -2,16 +2,27 @@ const Airtable = require('airtable-node');
 import { Inject } from 'typedi';
 import { BaseModel } from '../../shared/models/BaseModel';
 
+export interface ListOptions {
+  filterByFormula?: string;
+  maxRecords?: number;
+  pageSize?: number;
+  sort?: { field: string; direction: 'asc' | 'desc' }[];
+  view?: string;
+  cellFormat?: 'json' | 'string';
+  timeZone?: string;
+  userLocale?: string;
+}
+
 @Inject()
 export class RestDbService {
   async getDatas<T extends BaseModel>(
     baseId: string,
     tableName: string,
-    query?: any[]
+    options?: ListOptions
   ): Promise<T[]> {
     const airtable = this.getAirTableClient(baseId, tableName);
 
-    const { records } = await airtable.list();
+    const { records } = await airtable.list(options);
 
     const body: T[] = records.map(o => {
       const fields = o.fields;
