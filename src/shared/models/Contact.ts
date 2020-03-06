@@ -1,8 +1,10 @@
 import { IsNotEmpty, IsEmail, IsMobilePhone } from 'class-validator';
 import { plainToClassFromExist } from 'class-transformer';
+import { BaseModel } from './BaseModel';
 
-export class Contact {
+export class Contact extends BaseModel {
   constructor(data?: any) {
+    super();
     plainToClassFromExist(this, data);
   }
 

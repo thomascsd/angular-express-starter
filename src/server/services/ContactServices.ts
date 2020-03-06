@@ -1,6 +1,6 @@
 import { RestDbService } from './RestDbService';
 import { Inject } from 'typedi';
-import { Contact } from '../../shared/models/Contact';
+import { Contact } from '../../shared/models';
 
 @Inject()
 export class ContactService {
@@ -11,7 +11,7 @@ export class ContactService {
   }
 
   async saveContact(contact: Contact) {
-    await this.db.saveData<Contact>('contact', contact);
+    await this.db.saveData<Contact>('appLdD9UKehdDawCn', 'contact', contact);
     return 'ok';
   }
 }
