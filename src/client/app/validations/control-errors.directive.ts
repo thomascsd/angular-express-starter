@@ -36,16 +36,13 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
       .subscribe(() => {
         const key = this.control.name;
         const formGroup = this.formGroup.control;
-
-        // console.log(this.control);
-
         const errors = formGroup['customValidateErrors'] as BehaviorSubject<ShortValidationErrors>;
         // console.log(errors);
 
         errors
+          .asObservable()
           .pipe(
             map(shortErrors => shortErrors[key]),
-            filter(obj => !!obj),
             first()
           )
           .subscribe(value => {
@@ -53,12 +50,10 @@ export class ControlErrorsDirective implements OnInit, OnDestroy {
 
             if (value) {
               this.setError(value);
+            } else {
+              this.setError(null);
             }
           });
-
-        if (errors.observers.length === 0 && this.vcf) {
-          this.setError(null);
-        }
       });
   }
 
