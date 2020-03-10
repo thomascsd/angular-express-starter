@@ -54,6 +54,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    this.group.validate();
     if (this.group.valid) {
       this.contactService.saveContact(this.group.object).subscribe(() => {
         this.getContacts();
