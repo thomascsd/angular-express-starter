@@ -58,6 +58,7 @@
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "ngx-dynamic-form-builder": "^1.2.0",
+    "ngx-loading": "^8.0.0",
     "ngx-take-until-destroy": "^5.4.0",
     "protractor": "~5.4.2",
     "rimraf": "^3.0.2",

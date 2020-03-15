@@ -25,6 +25,7 @@ class ContactViewModel extends Contact {
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit, OnDestroy {
+  loading = false;
   group: DynamicFormGroup<Contact>;
   displayedColumns: string[] = ['cmd', 'name', 'email', 'mobile'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -43,6 +44,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   getContacts() {
+    this.loading = true;
     this.contactService
       .getContacts()
       .pipe(untilDestroyed(this))
@@ -50,12 +52,14 @@ export class ContactComponent implements OnInit, OnDestroy {
         const viewModels: ContactViewModel[] = contacts.map(c => new ContactViewModel(c));
         this.dataSource = new MatTableDataSource(viewModels);
         this.dataSource.sort = this.sort;
+        this.loading = false;
       });
   }
 
   save() {
     this.group.validate();
     if (this.group.valid) {
+      this.loading = true;
       this.contactService.saveContact(this.group.object).subscribe(() => {
         this.getContacts();
       });
@@ -64,6 +68,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   update(contact: ContactViewModel) {
     delete contact.updateMode;
+    this.loading = true;
     this.contactService.updateContact(contact).subscribe(() => {
       this.getContacts();
     });

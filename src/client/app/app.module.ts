@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DynamicFormBuilder } from 'ngx-dynamic-form-builder';
+import { NgxLoadingModule, ngxLoadingAnimationTypes } from 'ngx-loading';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -23,7 +24,11 @@ import { ValidationsModule } from './validations/validations.module';
     ReactiveFormsModule,
     HttpClientModule,
     MaterialModule,
-    ValidationsModule
+    ValidationsModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circleSwish,
+      fullScreenBackdrop: true
+    })
   ],
   providers: [{ provide: DynamicFormBuilder, useClass: DynamicFormBuilder }],
   bootstrap: [AppComponent]

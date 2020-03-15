@@ -29,6 +29,7 @@
           placeholder="mobile"
           class="form-control"
           formControlName="mobile"
+          maxlength="10"
         />
       </div>
       <input id="add" class="btn btn-primary" type="submit" value="submit" />
@@ -106,3 +107,4 @@
     <tr cdk-row *cdkRowDef="let row; columns: displayedColumns"></tr>
   </table>
 </div>
+<ngx-loading [show]="loading"></ngx-loading>
