@@ -3,6 +3,7 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
 import * as logger from 'morgan';
 import * as path from 'path';
+import * as helmet from 'helmet';
 import { ContactController } from './controllers/ContactController';
 
 export default class Server {
@@ -21,6 +22,7 @@ export default class Server {
     this.app.set('view engine', 'html');
     this.app.set('views', 'src');
     this.app.use(logger('dev'));
+    this.app.use(helmet());
 
     // Server static files from /dist
     this.app.get('*.*', express.static(this.distFolder));
