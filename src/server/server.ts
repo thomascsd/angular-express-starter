@@ -3,7 +3,7 @@ import { useExpressServer, useContainer } from 'routing-controllers';
 import { Container } from 'typedi';
 import * as logger from 'morgan';
 import * as path from 'path';
-import helmet from 'helmet';
+import * as helmet from 'helmet';
 import { ContactController } from './controllers/ContactController';
 
 export default class Server {
