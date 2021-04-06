@@ -1,29 +1,18 @@
 //const Airtable = require('airtable-node');
 import AsyncAirtable = require('asyncairtable');
-import { AirtableRecord, Fields } from 'asyncairtable/lib/@types';
+import { AirtableRecord, SelectOptions } from 'asyncairtable/lib/@types';
 import { Inject } from 'typedi';
 import { BaseModel } from '../../shared/models/BaseModel';
-
-export interface ListOptions {
-  filterByFormula?: string;
-  maxRecords?: number;
-  pageSize?: number;
-  sort?: { field: string; direction: 'asc' | 'desc' }[];
-  view?: string;
-  cellFormat?: 'json' | 'string';
-  timeZone?: string;
-  userLocale?: string;
-}
 
 @Inject()
 export class RestDbService {
   async getDatas<T extends BaseModel>(
     baseId: string,
     tableName: string,
-    options?: ListOptions
+    options?: SelectOptions
   ): Promise<T[]> {
     const airtable = this.getAirTableClient(baseId, tableName);
-    const records: AirtableRecord[] = await airtable.select(tableName);
+    const records: AirtableRecord[] = await airtable.select(tableName, options);
 
     const body = records
       .map((o: AirtableRecord) => {
