@@ -1,8 +1,8 @@
 import { RestDbService } from './RestDbService';
-import { Inject } from 'typedi';
+import { Service } from 'typedi';
 import { Contact } from '../../shared/models';
 
-@Inject()
+@Service()
 export class ContactService {
   constructor(private db: RestDbService) {}
 
