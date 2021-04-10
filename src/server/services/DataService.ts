@@ -1,11 +1,10 @@
-//const Airtable = require('airtable-node');
 import AsyncAirtable = require('asyncairtable');
 import { AirtableRecord, SelectOptions } from 'asyncairtable/lib/@types';
 import { Service } from 'typedi';
 import { BaseModel } from '../../shared/models/BaseModel';
 
 @Service()
-export class RestDbService {
+export class DataService {
   async getDatas<T extends BaseModel>(
     baseId: string,
     tableName: string,
