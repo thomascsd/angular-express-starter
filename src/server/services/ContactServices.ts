@@ -1,4 +1,4 @@
-import { DataService } from './DataService';
+import { DataService } from '@thomascsd/stools';
 import { Service } from 'typedi';
 import { Contact } from '../../shared/models';
 
