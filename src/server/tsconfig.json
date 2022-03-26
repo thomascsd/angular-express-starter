@@ -4,7 +4,8 @@
     "module": "commonjs",
     "outDir": "../../dist/",
     "baseUrl": "",
-    "target": "es2017"
+    "target": "esnext",
+    "allowSyntheticDefaultImports": true
   },
   "baseUrl": "../server",
   "include": ["../server/**/*"]
